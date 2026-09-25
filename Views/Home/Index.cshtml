@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Visão geral";
+}
+
+<section class="dashboard-hero">
+    <div class="hero-copy">
+        <span class="page-kicker">Painel da biblioteca</span>
+        <h1>Seu acervo, <span>organizado.</span></h1>
+        <p>
+            Um espaço simples para cadastrar, consultar, editar e remover livros do catálogo.
+            A navegação foi pensada para deixar as tarefas do acervo sempre a poucos cliques.
+        </p>
+
+        <div class="hero-actions">
+            <a class="btn btn-primary" asp-controller="Livro" asp-action="Criar">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14M5 12h14" />
+                </svg>
+                Novo livro
+            </a>
+            <a class="btn btn-secondary" asp-controller="Livro" asp-action="Index">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h4L12 6.5 14.5 4h4A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5v-13Z" />
+                    <path d="M12 6.5v13" />
+                </svg>
+                Ver acervo
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="dashboard-grid">
+    <div class="surface feature-card">
+        <div class="section-heading">
+            <div>
+                <h2>Acesso rápido</h2>
+                <p>Principais ações disponíveis no acervo.</p>
+            </div>
+        </div>
+
+        <div class="quick-grid">
+            <a class="quick-card" asp-controller="Livro" asp-action="Index">
+                <span class="quick-icon">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h4L12 6.5 14.5 4h4A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5v-13Z" />
+                        <path d="M12 6.5v13" />
+                    </svg>
+                </span>
+                <span><strong>Consultar livros</strong><span>Visualize o catálogo cadastrado.</span></span>
+            </a>
+
+            <a class="quick-card" asp-controller="Livro" asp-action="Criar">
+                <span class="quick-icon">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 5v14M5 12h14" />
+                    </svg>
+                </span>
+                <span><strong>Cadastrar livro</strong><span>Adicione um novo item ao acervo.</span></span>
+            </a>
+        </div>
+    </div>
+
+    <aside class="surface feature-card">
+        <div class="section-heading">
+            <div>
+                <h2>Fluxo do acervo</h2>
+                <p>Operações principais do sistema.</p>
+            </div>
+        </div>
+
+        <div class="library-principles">
+            <div class="principle">
+                <span class="principle-mark">1</span>
+                <span><strong>Cadastro</strong><span>Registre os dados básicos de cada livro.</span></span>
+            </div>
+            <div class="principle">
+                <span class="principle-mark">2</span>
+                <span><strong>Consulta</strong><span>Encontre os registros diretamente pelo acervo.</span></span>
+            </div>
+            <div class="principle">
+                <span class="principle-mark">3</span>
+                <span><strong>Manutenção</strong><span>Edite informações ou remova registros.</span></span>
+            </div>
+        </div>
+    </aside>
+</section>

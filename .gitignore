@@ -1,0 +1,85 @@
+# ==========================================
+# BibliotecaMVC - ASP.NET Core / Visual Studio
+# ==========================================
+
+# Build / compilação
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# JetBrains Rider / ReSharper
+.idea/
+_ReSharper*/
+*.DotSettings.user
+
+# Arquivos temporários do sistema operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs e arquivos temporários
+*.log
+logs/
+*.tmp
+*.temp
+
+# Resultados de testes / cobertura
+TestResults/
+*.trx
+.coverage
+.coveragexml
+coverage/
+
+# Publicações e artefatos de deploy
+publish/
+PublishProfiles/
+*.publishsettings
+
+# Pacotes NuGet gerados localmente
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Entity Framework / bancos locais gerados em desenvolvimento
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.mdf
+*.ldf
+
+# Configurações locais / segredos
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.local.json
+secrets.json
+
+# User Secrets do .NET
+secrets*/
+
+# Arquivos gerados pelo dotnet
+*.csproj.user
+
+# Arquivos de diagnóstico / dumps
+*.dmp
+*.hdmp
+*.stackdump
+
+# Arquivos de configuração local de ferramentas
+*.pidb
+*.pdb
+*.cache
+*.bak
+*.swp
+*.swo

@@ -1,0 +1,133 @@
+@model List<Livro>
+@{
+    ViewData["Title"] = "Acervo de livros";
+}
+
+<div class="catalog-header">
+    <div>
+        <span class="page-kicker">Catálogo</span>
+        <h1 class="page-title">Livros</h1>
+        <p class="page-description">Gerencie os registros do acervo em um só lugar.</p>
+    </div>
+
+    <div class="catalog-actions">
+        <a class="btn btn-primary" role="button" asp-controller="Livro" asp-action="Criar">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14" />
+            </svg>
+            Cadastrar livro
+        </a>
+    </div>
+</div>
+
+<section class="surface table-shell">
+    @if (Model != null && Model.Any())
+    {
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th class="cover-column">Capa</th>
+                    <th>Título</th>
+                    <th>ISBN</th>
+                    <th>Autor</th>
+                    <th>Editora</th>
+                    <th class="year-column">Ano</th>
+                    <th class="text-end">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Livro livro in Model)
+                {
+                    <tr>
+                        <td class="cover-cell">
+                            <div class="book-cover" data-isbn="@livro.ISBN" data-title="@livro.Titulo" aria-label="Capa de @livro.Titulo">
+                                <div class="cover-placeholder">Livro</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="book-title">@livro.Titulo</div>
+                        </td>
+                        <td>
+                            <span class="book-isbn">@livro.ISBN</span>
+                        </td>
+                        <td>@livro.Autor</td>
+                        <td>@livro.Editora</td>
+                        <td class="year-cell"><span class="year-badge">@livro.AnoPublicacao</span></td>
+                        <td>
+                            <div class="row-actions">
+                                <a class="btn btn-secondary btn-sm" role="button" asp-controller="Livro" asp-action="Editar" asp-route-id="@livro.Id">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 20h9" />
+                                        <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4L16.5 3.5Z" />
+                                    </svg>
+                                    Editar
+                                </a>
+                                <form asp-controller="Livro" asp-action="Excluir" method="POST">
+                                    <input type="hidden" name="id" value="@livro.Id" />
+                                    <button class="btn btn-danger btn-sm" type="submit">
+                                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M4 7h16M10 11v6M14 11v6M6.5 7l.8 13h9.4l.8-13M9 7V4h6v3" />
+                                        </svg>
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="empty-state">
+            <div class="empty-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h4L12 6.5 14.5 4h4A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5v-13Z" />
+                    <path d="M12 6.5v13" />
+                </svg>
+            </div>
+            <h3>O acervo ainda está vazio</h3>
+            <p>Cadastre o primeiro livro para começar a organizar sua biblioteca.</p>
+            <a class="btn btn-primary" asp-controller="Livro" asp-action="Criar">Cadastrar primeiro livro</a>
+        </div>
+    }
+</section>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.book-cover').forEach(async function (cover) {
+            const isbn = (cover.dataset.isbn || '').replace(/[^0-9Xx]/g, '');
+            const title = cover.dataset.title || '';
+            let url = '';
+
+            if (isbn) {
+                url = 'https://covers.openlibrary.org/b/isbn/' + isbn + '-M.jpg?default=false';
+            } else if (title) {
+                try {
+                    const response = await fetch('https://openlibrary.org/search.json?title=' + encodeURIComponent(title) + '&limit=1');
+                    if (response.ok) {
+                        const data = await response.json();
+                        const book = data.docs && data.docs[0];
+                        if (book && book.cover_i) {
+                            url = 'https://covers.openlibrary.org/b/id/' + book.cover_i + '-M.jpg';
+                        }
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            if (url) {
+                const image = new Image();
+                image.onload = function () {
+                    cover.innerHTML = '';
+                    cover.appendChild(image);
+                    cover.classList.add('has-cover');
+                };
+                image.src = url;
+                image.alt = 'Capa de ' + title;
+            }
+        });
+    </script>
+}

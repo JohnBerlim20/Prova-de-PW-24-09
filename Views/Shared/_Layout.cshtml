@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Biblioteca</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProjetoCadastroMVC.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="site-shell">
+        <header class="site-header">
+            <nav class="navbar navbar-expand-sm site-nav">
+                <div class="container-fluid p-0">
+                    <a class="navbar-brand brand-mark" asp-area="" asp-controller="Home" asp-action="Index">
+                        <span aria-hidden="true">
+							<img class="logo" src="favicon.ico" alt="Logo da Biblioteca" />
+                        </span>
+                        <span class="brand-copy">
+                            <span class="brand-name">Biblioteca</span>
+                            <span class="brand-subtitle">Acervo digital</span>
+                        </span>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Abrir navegação">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="mainNavigation">
+                        <ul class="navbar-nav ms-auto align-items-sm-center">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Visão geral</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-cta" asp-area="" asp-controller="Livro" asp-action="Index">Abrir acervo</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main role="main" class="page-wrap">
+            @RenderBody()
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <span>&copy; 2026 - Biblioteca</span>
+                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

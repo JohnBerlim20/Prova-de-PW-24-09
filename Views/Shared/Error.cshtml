@@ -1,0 +1,20 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Erro";
+}
+
+<section class="surface error-panel">
+    <span class="error-code">ERRO DO SISTEMA</span>
+    <h1>Não foi possível concluir a operação.</h1>
+    <h2>Ocorreu um problema ao processar a solicitação.</h2>
+
+    @if (Model.ShowRequestId)
+    {
+        <div class="code-box">
+            <strong>Request ID:</strong>
+            <code>@Model.RequestId</code>
+        </div>
+    }
+
+    <a class="btn btn-primary mt-4" asp-controller="Home" asp-action="Index">Voltar para a biblioteca</a>
+</section>
